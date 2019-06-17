@@ -1,0 +1,46 @@
+﻿<div class="row page_title">
+    <div class="col-sm-6">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-md-6" id="createClientPartial">
+        <partial name="_CreateClientPartial" />
+    </div>
+    <div class="col-xl-6 col-md-6" id="createAccountPartial">
+        <partial name="_CreateAccountPartial" />
+    </div>
+    <div class="col-xl-6 col-md-6" id="addUserToClientPartial">
+        <partial name="_AddUserToClientPartial" />
+    </div>
+    <div class="col-xl-6 col-md-6" id="addAccountToUserPartial">
+        <partial name="_AddAccountToUserPartial" />
+    </div>
+</div>
+
+<div id="clientListPartial"></div>
+
+<div id="acountListPartial"></div>
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <div class="card-header">TODO: Add users List Partial here</div>
+        </div>
+    </div>
+</div>
+<div id="userListPartial"></div>*@
+
+<div id="myModalPartial">
+    <partial name="_ModalPartial" />
+</div>
+@section Scripts {
+
+    <script src="~/js/AccountCreate.js"></script>
+    <script src="~/js/clientCreate.js"></script>
+    <script src="~/js/myModalScripts.js"></script>
+    <script src="~/js/userCreate.js"></script>
+    @*<script src="~/js/userAccounts.js"></script>*@
+    <script src="~/js/AddUserToClient.js"></script>
+    <script src="~/js/AddAccountToUser.js"></script>
+}

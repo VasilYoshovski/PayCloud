@@ -1,0 +1,51 @@
+﻿
+
+<div class="card mb-4">
+    <div class="col-xl-12 col-lg-12  col-sm-12">
+        <div class="row">
+            <button id="AssignAccountToUserTitleButton" onclick="SetAddAccountToUserMode()" class="card-header">Add account to user</button>
+            <button id="UnassignAccountFromUserTitleButton" onclick="SetRemoveAccountFromUserMode()" class="card-header">Remove account from user</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal row mt-2" id="add-account-to-user-form">
+            <div class="col-xl-12 col-lg-12  col-sm-12">
+                <div class="form-group">
+                    <label>Client</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfClientsAATUP" data-clientid="" data-clientname="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>User</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfUsersRelatedToClientAATUP" data-userid="" data-username="" />
+                    </div>
+                </div>
+                <div id="SearchEntryAddAccountToUser" class="form-group">
+                    <label>Account to add</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfAccountsOfClientNotRelatedToUserAATUP" data-accountid="" data-accountname="" />
+                    </div>
+                </div>
+                <div id="SearchEntryRemoveAccountFromUser" class="form-group" style="display:none">
+                    <label>Account to remove</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfAccountsOfClientRelatedToUserAATUP" data-accountid="" data-accountname="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-left">
+                        <button type="button" class="btn btn-default mt-2" onclick="AccountsOfUserModal()" ID="callAccountsOfUserModalButton">User's accounts</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button id="AddAccountToUserBtn" type="submit" class="btn btn-default mt-2">Add</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button id="RemoveAccountFromUserBtn" type="button" onclick="callRemoveAccountFromUserAjax()" class="btn btn-default mt-2" style="display:none">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

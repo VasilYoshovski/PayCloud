@@ -1,0 +1,31 @@
+Services
+
+Top priority
+--------------
+Client Services: find, list of clients, add client
+Accound Services: list of accounts, add account, find, link to client
+User Services: list of users, add user, find, link to account
+Banner Services: list of images, add images, remove images, find
+
+
+Little priority
+Transactions service: make payment, list of tarnsactions, find
+
+--------------------------
+
+
+
+Admin area
+
+Admin controller 
+Client controller 
+User controller 
+Account controller 
+Banner controller 
+
+-----------------------------------
+
+User area
+
+Account controller 
+Transaction controller 

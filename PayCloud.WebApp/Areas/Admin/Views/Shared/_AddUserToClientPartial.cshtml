@@ -1,0 +1,43 @@
+﻿<div class="card mb-4">
+    <div class="col-xl-12 col-lg-12  col-sm-12">
+        <div class="row">
+            <button id="AddUserToClientTitleButton" onclick="SetAddUserToClientMode()" class="card-header">Add user to client</button>
+            <button id="RemoveUserFromClientTitleButton" onclick="SetRemoveUserFromClientMode()" class="card-header">Remove user from client</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <form class="form-horizontal row mt-2" id="add-user-to-client-form">
+            <div class="col-xl-12 col-lg-12  col-sm-12">
+                <div class="form-group">
+                    <label>Client</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="clientListAUTCP" data-clientid="" data-clientname="" />
+                    </div>
+                </div>
+                <div id="SearchEntryAddUserToClient" class="form-group">
+                    <label>User to add</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfUsersNotRelatedToClientAUTCP" data-userid="" data-username="" />
+                    </div>
+                </div>
+                <div id="SearchEntryRemoveUserFromClient" style="display:none" class="form-group">
+                    <label>User to remove</label>
+                    <div class="ui-widget" id="divlist">
+                        <input type="text" class="form-control" name="search" placeholder="Search.." ID="listOfUsersRelatedToClientAUTCP" data-userid="" data-username="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 text-left">
+                        <button type="button" class="btn btn-default mt-2" onclick="callCreateUserModal()" ID="callCreateUserModalButton" data-userid="" data-clientid="">Create user</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button id="AddUserToClientBtn" type="submit" class="btn btn-default mt-2">Add</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button id="RemoveUserFromClientBtn" type="button" onclick="callRemoveUserFromClientAjax()" class="btn btn-default mt-2" style="display:none">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

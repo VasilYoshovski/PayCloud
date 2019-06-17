@@ -1,0 +1,51 @@
+﻿@model BannerIndexViewModel
+
+<div class="row page_title">
+    <div class="col-sm-6">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="row">
+        <input id="ShowHideCreatebannerPartial" onclick="ShowHideCreatebannerPartialForm()" class="card-header" style="width:500px" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6 col-md-6" id="createBannerPartial" style="display:none">
+        @await Html.PartialAsync("_CreateBannerPartial", Model.BannerViewModelObject)
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="row">
+        <div class="card-header" style="width:500px">Banners List</div>
+    </div>
+</div>
+
+<div class="row">
+    <select id="Banner-Type-Selector" class="btn btn-default mt-2">
+        @*<select asp-for="@Model.Nickname" id="Banner-Type-Selector" class="badge btn-outline-info">*@
+        <option value="0" style="background-color: hotpink">Display all banners</option>
+        <option value="1" style="background-color: hotpink">Display active banners only</option>
+        <option value="2" style="background-color: hotpink">Display inactive banners only</option>
+    </select>
+
+    @*<input type="text" placeholder="Enter a search criteria" asp-for="@Model.SearchString" value="@Model.SearchString" class="form-control" style="width:300px">*@
+    @*<button type="submit" id="Refresh-Page-Button" class="badge btn-outline-info">Filter</button>*@
+</div>
+@*<button type="reset" class="badge btn-outline-info">Reset filter</button>*@
+
+<div id="bannersListPartial"></div>
+
+<div id="myModalPartial">
+    <partial name="_ModalPartial" />
+</div>
+
+@section Scripts {
+
+    <script src="~/js/AccountCreate.js"></script>
+    <script src="~/js/bannersCreate.js"></script>
+    <script src="~/js/myModalScripts.js"></script>
+}

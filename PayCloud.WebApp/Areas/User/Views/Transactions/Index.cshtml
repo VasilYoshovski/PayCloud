@@ -1,0 +1,37 @@
+﻿<div class="row page_title">
+    <div class="col-sm-6">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option2" autocomplete="off" onchange="accountTransactions();"> All transactions
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked onchange="myTransactions();"> My transactions
+            </label>
+        </div>
+    </div>
+</div>
+
+<div id="transactionListPartial"></div>
+<div class="non-visible" id="mytransactionListPartial"></div>
+
+<div id="myModalPartial">
+    <partial name="_ModalPartial" />
+</div>
+@section Scripts {
+
+
+    <script src="~/js/userAccountTransaction.js"></script>
+    <script src="~/js/myModalScripts.js"></script>
+    <script src="~/js/mySelect2.js"></script>
+    <script src="~/js/myDialogModalScripts.js"></script>
+    <script src="~/js/paymentScripts.js"></script>
+
+
+
+}

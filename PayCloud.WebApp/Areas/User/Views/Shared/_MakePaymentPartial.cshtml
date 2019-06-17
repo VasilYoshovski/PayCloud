@@ -1,0 +1,48 @@
+﻿@model UserAccountViewModel
+
+<div class="card mb-4">
+    <div class="card-header">Make payment</div>
+    <div class="card-body">
+        <div class="col-xl-12 col-lg-12  col-sm-12">
+
+        </div>
+        <form class="form-horizontal row mt-2" id="create-payment-form" asp-area="User" asp-controller="Accounts">
+            <div class="col-xl-12 col-lg-12  col-sm-12">
+                <div class="form-group">
+                    <label>Sender account</label>
+                    @if (Model != null)
+                    {
+                        <input type="text" class="form-control" value="@($"{Model.ClientName}: {Model.AccountNumber} (balance: {Model.Balance})")" id="senderaccount" data-senderaccount="@(Model.AccountId)" data-balance="@Model.Balance" disabled>
+                    }
+                    else
+                    {
+                        <select class="js-data-example-ajax" id="senderaccount" data-senderaccount="" data-balance=""></select>
+                    }
+                </div>
+                <div class="form-group">
+                    <label>Payment amount</label>
+                    <input type="number" class="form-control" placeholder="Enter amount" value="" ID="paymentAmount" data-amount="" required autofocus="">
+                </div>
+                <div class="form-group">
+                    <label>Receiver account</label>
+                    <select class="js-data-example-ajax" id="receiveraccount" data-receiveraccount=""></select>
+                </div>
+                <div class="form-group">
+                    <label>Payment description</label>
+                    <input type="text" class="form-control" id="paymentDescription">
+                </div>
+            </div>
+            <div class="col-6 text-left">
+
+                <button type="button" class="btn btn-default mt-2" onclick="savePayment()">Save Payment</button>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-default mt-2 ld-ext-right" id="make-payment-button" onclick="makePayment()">
+                    <div class="ld ld-ring ld-spin"></div>
+                    Make Payment
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

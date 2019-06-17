@@ -1,0 +1,31 @@
+﻿@model AdminLoginViewModel
+@{
+        Layout = "_LoginLayout";
+    ViewData["Title"] = "Admin login - Pay Cloud";
+}
+
+
+<div>
+    <div class="bg_image h-100">
+        <div class="lr_wrap">
+            <div class="card-body">
+                <h4 class="my-4 text-center text-uppercase">Pay Cloud Admin Login</h4>
+                <form asp-controller="Identity" asp-action="Login" method="post">
+                    <div class="input-item">
+                        <label for="InputEmail">Username</label>
+                        <input asp-for="Username" id="InputEmail" type="text" placeholder="Your Username" class="form-control" required>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="input-item">
+                        <label for="InputPassword">Password</label>
+                        <input asp-for="Password" type="password" id="InputPassword" placeholder="Password" class="form-control" required>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-block">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

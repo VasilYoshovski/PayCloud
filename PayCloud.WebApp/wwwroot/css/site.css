@@ -1,0 +1,148 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.table td, .table th {
+    padding: .55rem;
+}
+
+.body {
+    font-size: 0.95rem;
+}
+
+.carousel-control-next-icon .carousel-control-prev-icon {
+    background: #ffcc6759 no-repeat center center;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #f6f6f8;
+}
+
+.card {
+    background-color: #ffffffad;
+}
+
+.btn-secondary {
+    background-color: rgba(0,0,0,0.3);
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-cust-big {
+        max-width: 85%;
+        margin: 1.75rem auto;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-cust-mid {
+        max-width: 55%;
+        margin: 1.75rem auto;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-cust-sm {
+        max-width: 35%;
+        margin: 1.75rem auto;
+    }
+}
+
+td.nowrap, th.nowrap {
+    width: 1% !important;
+    white-space: nowrap !important;
+}
+
+.iconbtn {
+    background-color: orange; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 3px,0px,3px,8px;
+    ; /* Some padding */
+    margin: 0px;
+    text-align: center;
+    width: 30px;
+    font-size: 14px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+    /* Darker background on mouse-over */
+    .iconbtn:hover {
+        background-color: darkorange;
+    }
+
+.green-text {
+    color: green
+}
+
+.non-visible {
+    display: none
+}
+
+.red-text {
+    color: red
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+}

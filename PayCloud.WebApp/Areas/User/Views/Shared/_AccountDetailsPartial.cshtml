@@ -1,0 +1,45 @@
+﻿@model UserAccountViewModel
+
+
+<partial name="_LineChartPartial" />
+
+
+<div class="card mb-4">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+        <form class="form-horizontal row mt-2">
+
+            <div class="col-xl-12 col-lg-12  col-sm-12">
+                <div class="form-group">
+                    <dl class="row">
+                        <dt class="col-xl-3 col-lg-4 col-sm-12">
+                            @Html.DisplayNameFor(model => model.NickName)
+                        </dt>
+                        <dd class="col-xl-9 col-lg-8 col-sm-12">
+                            @Html.DisplayFor(model => model.NickName)
+                        </dd>
+                        <dt class="col-xl-3 col-lg-4 col-sm-12">
+                            @Html.DisplayNameFor(model => model.AccountNumber)
+                        </dt>
+                        <dd class="col-xl-9 col-lg-8 col-sm-12">
+                            @Html.DisplayFor(model => model.AccountNumber)
+                        </dd>
+                        <dt class="col-xl-3 col-lg-4 col-sm-12">
+                            @Html.DisplayNameFor(model => model.Balance)
+                        </dt>
+                        <dd class="col-xl-9 col-lg-8 col-sm-12">
+                            @Html.DisplayFor(model => model.Balance)
+                        </dd>
+                        <dt class="col-xl-3 col-lg-4 col-sm-12">
+                            @Html.DisplayNameFor(model => model.ClientName)
+                        </dt>
+                        <dd class="col-xl-9 col-lg-8 col-sm-12">
+                            @Html.DisplayFor(model => model.ClientName)
+                        </dd>
+                    </dl>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

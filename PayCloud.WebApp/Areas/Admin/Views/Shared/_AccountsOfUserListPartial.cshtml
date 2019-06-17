@@ -1,0 +1,174 @@
+﻿@model PayCloud.WebApp.Utils.PaginatedList<PayCloud.WebApp.Areas.Admin.Models.AccountViewModels.AccountViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <div class="card-header">Accounts of User List</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length" id="accTable_length">
+                                    <label>
+                                        Show
+                                        <select name="dataTable_length" class="form-control form-control-sm" id="accTableLength">
+                                            @foreach (var option in (int[])ViewData["LengthOptions"])
+                                            {
+                                                if (option == Model.PageSize)
+                                                {
+                                                    <option value="@option" selected>@option</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@option">@option</option>
+                                                }
+                                            }
+
+                                        </select> entries
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="accTable_filter" class="dataTables_filter">
+                                    <label>
+                                        Search:
+                                        <input type="search" class="form-control form-control-sm" value="@ViewData["currentFilter"]" placeholder="Search in whole table" id="accTableSearch">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-hover mb-0 table_s1 " width="100%" cellspacing="0" id="acctable-header">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th class="center">
+                                        Num
+                                    </th>
+                                    <th>
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</a>
+                                    </th>
+                                    <th class="center">
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().ClientName)</a>
+                                    </th>
+                                    <th class="right">
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
+                                    </th>
+                                    @*<th class="right">
+            <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
+        </th>*@
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th class="center">
+                                        Num
+                                    </th>
+                                    <th>
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</a>
+                                    </th>
+                                    <th class="center">
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().ClientName)</a>
+                                    </th>
+                                    <th class="right">
+                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
+                                    </th>
+                                    @*<th class="right">
+            <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
+        </th>*@
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @{int count = 0; }
+                                @foreach (var item in Model)
+                                {
+                                    count = count + 1;
+
+                                    <tr>
+                                        <td class="center">
+                                            @(count + (Model.PageIndex - 1) * Model.PageSize)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AccountNumber)
+                                        </td>
+                                        <td class="center">
+                                            @Html.DisplayFor(modelItem => item.ClientName)
+                                        </td>
+                                        <td class="right">
+                                            @Html.DisplayFor(modelItem => item.Balance)
+                                        </td>
+                                        @*<td class="right">
+                                            @Html.DisplayFor(modelItem => item.NickName)
+                                        </td>*@
+                                        <td align="right">
+                                            <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+
+    <div class="dataTables_paginate paging_simple_numbers">
+        <ul class="pagination">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <li class="paginate_button page-item previous @prevDisabled">
+                <a asp-action="GetAccountsOfUserList"
+                   asp-route-userId="@ViewData["UserId"]"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="page-link accTableClickHandler">
+                    Previous
+                </a>
+            </li>
+            @{
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    var isactiv = "";
+                    if (i == Model.PageIndex)
+                    {
+                        isactiv = "active";
+                    }
+                    else
+                    {
+                        isactiv = "";
+                    }
+                    <li class="paginate_button page-item @isactiv">
+                        <a asp-action="GetAccountsOfUserList"
+                           asp-route-userId="@ViewData["UserId"]"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber=@i
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="page-link accTableClickHandler">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+            <li class="paginate_button page-item next @nextDisabled">
+                <a asp-action="GetAccountsOfUserList"
+                   asp-route-userId="@ViewData["UserId"]"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="page-link accTableClickHandler">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

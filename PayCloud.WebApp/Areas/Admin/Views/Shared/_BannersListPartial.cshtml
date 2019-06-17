@@ -1,0 +1,169 @@
+﻿@model PayCloud.WebApp.Utils.PaginatedList<BannerViewModel>
+
+@{
+    if (Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.First().ImageData)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.First().EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.First().StartDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int loopCounter = 0; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImageLocationPath" alt="missing image" style="width:25px;height:25px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            <button type="button" onclick="CallMoreModal('M+@loopCounter')" class="btn btn-default mt-2 MoreButtonModal" value="M+@loopCounter" data-imagelocationpath="@item.ImageLocationPath" data-startdate="@item.StartDate" data-enddate="@item.EndDate" data-url="@item.UrlLink" data-bannerid="@item.BannerId">Info</button>
+                        </td>
+                        <td>
+                            <button type="button" onclick="deleteBannerAjax('@item.BannerId')" class="btn btn-default mt-2 MoreButtonModal" datadata-bannerid="@item.BannerId">Delete</button>
+                        </td>
+                    </tr>
+                    loopCounter++;
+                }
+            </tbody>
+        </table>
+
+        <button type="button" id="editModal_Buton" hidden class="btn btn-info btn-lg" data-target="#myModalCommon" data-toggle="modal">Edit</button>
+
+        <div class="modal" id="myModalCommon" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="form-group">
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <form asp-area="Admin" asp-controller="Banners" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.First().BannerId" class="control-label"></label>
+                                        <input asp-for="@Model.First().BannerId" id="editBanerID" class="form-control" style="width:100px" readonly />
+                                        <span asp-validation-for="@Model.First().BannerId" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <img src="@Model.First().ImageLocationPath" alt="missing image" id="editImage" style="width:150px;height:150px" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.First().StartDate" class="control-label"></label>
+                                        <input type="text" asp-for="@Model.First().StartDate" id="editStartDate" class="form-control" style="width:300px" readonly />
+                                        <span asp-validation-for="@Model.First().StartDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.First().EndDate" class="control-label"></label>
+                                        <input type="text" asp-for="@Model.First().EndDate" id="editEndDate" class="form-control" style="width:300px" readonly />
+                                        <span asp-validation-for="@Model.First().EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.First().UrlLink" class="control-label"></label>
+                                <input asp-for="@Model.First().UrlLink" id="editUrlLink" class="form-control" readonly />
+                                <span asp-validation-for="@Model.First().UrlLink" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.First().ImageLocationPath" class="control-label"></label>
+                                <input asp-for="@Model.First().ImageLocationPath" id="editImageLocationPath" class="form-control" readonly />
+                                <span asp-validation-for="@Model.First().ImageLocationPath" class="text-danger"></span>
+                            </div>
+                            @*<button asp-area="Admin" asp-controller="Banners" asp-action="DeleteConfirmed" asp-route-id="1" type="submit" class="btn bg-primary" id="modalButonSave" value="-1" data-dismiss="modal">save</button>
+            <button asp-area="Admin" asp-controller="Banners" asp-action="Delete" asp-route-id="1" type="submit" class="btn bg-primary" id="modalButonDelete" value="-1" data-dismiss="modal">delete</button>*@
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn bg-primary" id="modalButonClose" value="-1" data-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4">
+            <img src="~/images/paycloud_no_search_results.png" alt="No banners found!" style="width:520px;height:390px" />
+        </div>
+    }
+}
+
+<div>
+
+    <div class="dataTables_paginate paging_simple_numbers">
+        <ul class="pagination">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <li class="paginate_button page-item previous @prevDisabled">
+                <a asp-action="GetBannersList"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="page-link accTableClickHandler">
+                    Previous
+                </a>
+            </li>
+            @{
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    var isactiv = "";
+                    if (i == Model.PageIndex)
+                    {
+                        isactiv = "active";
+                    }
+                    else
+                    {
+                        isactiv = "";
+                    }
+                    <li class="paginate_button page-item @isactiv">
+                        <a asp-action="GetBannersList"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageNumber=@i
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="page-link accTableClickHandler">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+            <li class="paginate_button page-item next @nextDisabled">
+                <a asp-action="GetBannersList"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="page-link accTableClickHandler">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/js/bannersCreatePartial.js"></script>
+}

@@ -1,0 +1,39 @@
+﻿<div class="row page_title">
+    <div class="col-sm-6">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-4 col-md-5" id="createClientPartial">
+
+        <button type="button" class="btn btn-default mt-2 btn-block" style="width:100%; height:70px; margin-top:0px!important;" onclick="showPaymentModal(event)">Make new payment</button>
+        <br />
+
+        <partial name="_PieChartPartial" />
+    </div>
+    <div class="col-xl-8 col-md-7" id="acountListPartial">
+    </div>
+
+</div>
+
+<div id="myModalPartial">
+    <partial name="_ModalPartial" />
+</div>
+@section Scripts {
+    <script>
+        var modalAccountId;
+    </script>
+    <script src="~/js/admin-charts.min.js"></script>
+    <script src="~/js/lineChart.js"></script>
+
+    <script src="~/js/userAccounts.js"></script>
+    <script src="~/js/userAccountTransaction.js"></script>
+
+    <script src="~/js/myModalScripts.js"></script>
+    <script src="~/js/mySelect2.js"></script>
+    <script src="~/js/paymentScripts.js"></script>
+    <script src="~/js/nicknameScripts.js"></script>
+
+
+}

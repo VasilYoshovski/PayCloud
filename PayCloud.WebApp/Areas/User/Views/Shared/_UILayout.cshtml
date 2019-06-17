@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content>
+    <meta name="author" content>
+    <title>@ViewData["Title"] - PayCloud</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png">
+    <!-- Bootstrap core CSS-->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Google Font -->
+    <!-- Icon Fonts-->
+    <link href="/vendor/webfont/css/cryptocoins.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/webfont/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="/css/admin.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+
+    <!-- Toastr-->
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">*@
+    <link rel="stylesheet" href="~/css/toastr.min.css">
+    <!-- JQuery UI css-->
+    <link rel="stylesheet" href="~/jquery-ui-1.12.1/jquery-ui.min.css">
+    <!-- Custom styles for project-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/loading.css" />
+    <link rel="stylesheet" href="~/css/loading-btn.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="fixed-nav sticky-footer" id="page-top">
+    <div class="bg_image h-100">
+        <span class="AntiForge"> @Html.AntiForgeryToken() </span>
+        <partial name="_SideNavPartial" />
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Stanislav Dinev - Vasil Yoshovski</small>
+                    <br />
+                    <small>© 2019 Telerik Academy.</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded btn-default" onclick="window.scrollTo(0, 0);">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Do you want to end your current session...</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href='@Url.Action("Logout","Identity")' onclick="userRemoveSessionSelect();">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="_MyDialogModal" />
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!--Perfect scrollbar.js-->
+    <script src="/js/perfect-scrollbar.js"></script>
+    <!-- countdown js  -->
+    <script src="/js/jquery.countdown.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/admin.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="/js/admin-datatables.min.js"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>*@
+    <!-- Toastr-->
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>*@
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/toastrOptions.js"></script>
+
+    <!-- JQuery UI-->
+    <script src="~/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script src="~/js/userMenu.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
