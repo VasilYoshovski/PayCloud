@@ -230,7 +230,7 @@ namespace PayCloud.Services
                     }
                     else
                     {
-                        from = allCount - to;
+//                        from = allCount - to;
                     }
                 }
                 contains = string.IsNullOrWhiteSpace(contains) ? "" : contains.Trim().ToLower();
@@ -264,7 +264,7 @@ namespace PayCloud.Services
                     }
                     else
                     {
-                        from = allCount - to;
+//                        from = allCount - to;
                     }
                 }
                 contains = string.IsNullOrWhiteSpace(contains) ? "" : contains.Trim().ToLower();
@@ -298,7 +298,7 @@ namespace PayCloud.Services
                     }
                     else
                     {
-                        from = allCount - to;
+ //                       from = allCount - to;
                     }
                 }
                 contains = string.IsNullOrWhiteSpace(contains) ? "" : contains.Trim().ToLower();

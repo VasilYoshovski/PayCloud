@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     if (document.getElementById("createBannerPartial").style.display === "none") {
-        document.getElementById("ShowHideCreatebannerPartial").value = "Show Create banner form";
+        document.getElementById("ShowHideCreatebannerPartial").innerText = "Show Create banner form";
     }
     else {
         ShowHideCreatebannerPartialForm();
@@ -11,10 +11,26 @@ $(document).ready(function () {
     getBannersList('/admin/banners/GetBannersList', 'bannersListPartial');
 });
 
+
+$('#bannersListPartial').click(function (event) {
+    var target = $(event.target)
+    console.log(event);
+
+    if (target.hasClass('bnrTableClickHandler') && !target.is(':disabled')) {
+        event.stopPropagation();
+        event.preventDefault();
+        console.log("part-----");
+        var d = $(event.target).attr('href');
+        console.log(d);
+        getBannersList(d, 'bannersListPartial');
+    }
+});
+
 function CallMoreModal(param) {
     var thisTarget = event.target;
     var modalType = param.substring(0, 1);
     var tempIndex = param.substring(2);
+    console.log('-----mm--')
     $("#modalButonSave").val(tempIndex);
     $("#modalButonDelete").val(tempIndex);
     $("#modalButonClose").val(tempIndex);
@@ -40,10 +56,10 @@ document.getElementById("Banner-Type-Selector").onchange = function () {
 function ShowHideCreatebannerPartialForm() {
     var x = document.getElementById("createBannerPartial");
     if (x.style.display === "none") {
-        document.getElementById("ShowHideCreatebannerPartial").value = "Hide Create banner form";
+        document.getElementById("ShowHideCreatebannerPartial").innerText = "Hide Create banner form";
         x.style.display = "block";
     } else {
-        document.getElementById("ShowHideCreatebannerPartial").value = "Show Create banner form";
+        document.getElementById("ShowHideCreatebannerPartial").innerText = "Show Create banner form";
         x.style.display = "none";
     }
 }
@@ -140,7 +156,7 @@ function deleteBannerAjax(bannerId) {
 }
 
 function getBannersList(url, elementid, sort, filter, search, pagenum) {
-
+    console.log('ajax ban')
     if (url == null) {
         url = '/admin/banners/GetBannersList';
     }
@@ -162,11 +178,12 @@ function getBannersList(url, elementid, sort, filter, search, pagenum) {
         //    pageNumber: pagenum
         //},
         success: function (data) {
-            //console.log(data);
+            console.log(data);
+            console.log($('#' + elementid))
             $('#' + elementid).html(data);
         },
         error: function (xhr) {
-            console.log(xhr);
+            //console.log(xhr);
 
             $('#' + elementid).html('Error loading account list...');
         }
@@ -190,8 +207,7 @@ $("#fileUpload").on('change', function () {
                     // access image size here
                     const sizeW = 100;
                     const sizeH = sizeW;
-                    if (sizeW > this.width || sizeH > this.height)
-                    {
+                    if (sizeW > this.width || sizeH > this.height) {
                         document.getElementById("fileUpload").value = null;
                         document.getElementById("SelectedImageName").value = "";
                         infoDialogModal("Image should have width and height that are at least " + sizeH + "px! Current image has width of " + this.width + "px and height of " + this.height + "px", (ans) => {
@@ -229,7 +245,7 @@ $("#fileUpload").on('change', function () {
         image_holder.show();
         const file = $(this)[0].files[0];
         const fileType = file['type'];
-        const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/svg'];
+        const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/svg+xml'];
         if (!validImageTypes.includes(fileType)) {
             document.getElementById("fileUpload").value = null;
             document.getElementById("SelectedImageName").value = "";

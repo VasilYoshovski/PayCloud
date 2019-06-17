@@ -278,7 +278,7 @@ namespace PayCloud.Services
 
         public async Task SendPayment(int transactionId)
         {
-            using (var scope = await this.context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable))
+            using (var scope = await this.context.Database.BeginTransactionAsync(System.Data.IsolationLevel.RepeatableRead))
             {
 
                 var transaction =
@@ -327,7 +327,7 @@ namespace PayCloud.Services
 
         public async Task MakePaymentAsync(TransactionCUDto transactionDto)
         {
-            using (var scope = await this.context.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable))
+            using (var scope = await this.context.Database.BeginTransactionAsync(System.Data.IsolationLevel.RepeatableRead))
             {
 
                 if (!await this.userService.IsUserAuthorizedForAccount(transactionDto.SenderAccountId))

@@ -6,36 +6,25 @@
     </div>
 </div>
 
-<div class="card mb-4">
-    <div class="row">
-        <input id="ShowHideCreatebannerPartial" onclick="ShowHideCreatebannerPartialForm()" class="card-header" style="width:500px" />
-    </div>
-</div>
-
 <div class="row">
-    <div class="col-xl-6 col-md-6" id="createBannerPartial" style="display:none">
-        @await Html.PartialAsync("_CreateBannerPartial", Model.BannerViewModelObject)
-    </div>
-</div>
-
-<div class="card mb-4">
-    <div class="row">
-        <div class="card-header" style="width:500px">Banners List</div>
-    </div>
-</div>
-
-<div class="row">
-    <select id="Banner-Type-Selector" class="btn btn-default mt-2">
+    <select id="Banner-Type-Selector" class="btn btn-default mt-2" style="margin:15px">
         @*<select asp-for="@Model.Nickname" id="Banner-Type-Selector" class="badge btn-outline-info">*@
         <option value="0" style="background-color: hotpink">Display all banners</option>
         <option value="1" style="background-color: hotpink">Display active banners only</option>
         <option value="2" style="background-color: hotpink">Display inactive banners only</option>
     </select>
 
+    <button class="btn btn-default mt-2" id="ShowHideCreatebannerPartial" onclick="ShowHideCreatebannerPartialForm()" style="margin:15px"></button>
     @*<input type="text" placeholder="Enter a search criteria" asp-for="@Model.SearchString" value="@Model.SearchString" class="form-control" style="width:300px">*@
     @*<button type="submit" id="Refresh-Page-Button" class="badge btn-outline-info">Filter</button>*@
 </div>
 @*<button type="reset" class="badge btn-outline-info">Reset filter</button>*@
+
+<div class="row">
+    <div class="col-xl-8 col-md-8" id="createBannerPartial" style="display:none">
+        @await Html.PartialAsync("_CreateBannerPartial", Model.BannerViewModelObject)
+    </div>
+</div>
 
 <div id="bannersListPartial"></div>
 

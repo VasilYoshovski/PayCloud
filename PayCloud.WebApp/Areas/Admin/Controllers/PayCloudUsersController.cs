@@ -250,7 +250,7 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
                 {
                     return this.BadRequest(this.Json("Error: User not created"));
                 }
-                return this.Ok(this.Json($"Created user with name {createdUser.Username} and nickname {createdUser.Name}"));
+                return this.Ok(this.Json($"Created user with username {createdUser.Username} and name {createdUser.Name}"));
             }
             return this.BadRequest(this.Json("User input data is invalid"));
         }

@@ -42,7 +42,7 @@ namespace PayCloud.WebApp.Utils
                 }
                 else
                 {
-                    context.Response.Redirect("/");
+                    context.Response.Redirect("/Error?errorMessage=" + ex.Message);
                 }
             }
             catch (Exception ex)
