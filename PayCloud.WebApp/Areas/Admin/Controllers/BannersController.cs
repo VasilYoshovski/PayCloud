@@ -47,13 +47,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
         }
 
         // GET: Products list JSON for AJAX
-        public async Task<IActionResult> GetBannersList(string term, int bannerTypeSelector)
+        public async Task<IActionResult> GetBannersList(string term, int bannerTypeSelector, int? pageNumber, int? totalPages, int? pageSize)
         {
-            int? pageSize = 5;
-            if (pageSize == null)
-            {
-                pageSize = 5;
-            }
             string sortOrder = "";
             string currentFilter = "";
             this.ViewData["CurrentSort"] = sortOrder;
@@ -86,8 +81,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             var BannerIndexViewModelObject = new BannerIndexViewModel()
             {
                 BannerViewModelObject = x,
-                PageIndex = 0,
-                TotalPages = 0,
+                PageIndex = pageNumber ?? 1,
+                TotalPages = totalPages ?? 1,
                 HasNextPage = false,
                 HasPreviousPage = false,
                 ElementsPerPage = pageSize ?? 5,
@@ -101,8 +96,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 case 1:
                     {
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllActiveBannersByFilterAsync(
-                            BannerIndexViewModelObject.PageIndex - 1,
+                        (List<Banner> filteredList, int allCount, int pageNum, int elementsPerPage) = await this.bannerServices.GetPagedAllActiveBannersByFilterAsync(
+                            BannerIndexViewModelObject.PageIndex,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
                         BannerIndexViewModelObject.BannersList = this.bannersCollectionMapper.MapFrom(filteredList);
@@ -112,8 +107,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
                     }
                 case 2:
                     {
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllInactiveBannersByFilterAsync(
-                            BannerIndexViewModelObject.PageIndex - 1,
+                        (List<Banner> filteredList, int allCount, int pageNum, int elementsPerPage) = await this.bannerServices.GetPagedAllInactiveBannersByFilterAsync(
+                            BannerIndexViewModelObject.PageIndex,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
                         BannerIndexViewModelObject.BannersList = this.bannersCollectionMapper.MapFrom(filteredList);
@@ -125,7 +120,7 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
                 default:
                     {
                         BannerIndexViewModelObject.BannerActivityType = 0;
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
+                        (List<Banner> filteredList, int allCount, int pageNum, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
                             BannerIndexViewModelObject.PageIndex - 1,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
@@ -139,24 +134,23 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 if (BannerIndexViewModelObject.AllDatabaseBannersCount < BannerIndexViewModelObject.ElementsPerPage)
                 {
-                    BannerIndexViewModelObject.PageIndex = 1;
+                    //BannerIndexViewModelObject.PageIndex = 1;
                 }
                 else
                 {
-                    BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
+                    //BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
                 }
             }
             BannerIndexViewModelObject.HasPreviousPage = (BannerIndexViewModelObject.PageIndex > 1) ? true : false;
             BannerIndexViewModelObject.HasNextPage = (BannerIndexViewModelObject.PageIndex < BannerIndexViewModelObject.TotalPages) ? true : false;
             var result1 = PaginatedList<BannerViewModel>.Create(BannerIndexViewModelObject.BannersList.Banners.ToList(), BannerIndexViewModelObject.AllDatabaseBannersCount/*accountsCount*/, BannerIndexViewModelObject.PageIndex, BannerIndexViewModelObject.ElementsPerPage/*(int)pageSize*/, true);
-
             return this.PartialView("_BannersListPartial", result1);
             //return this.Json(new  BannerIndexViewModelObject);
         }
 
         // GET: Admin/Banners
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber, int? totalPages, int? pageSize)
         {
             this.ViewData["Title"] = "Banners administration";
             var tmpDateTime = this.dateTimeNowProvider.Now;
@@ -181,18 +175,18 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             var BannerIndexViewModelObject = new BannerIndexViewModel()
             {
                 BannerViewModelObject = x,
-                PageIndex = 0,
-                TotalPages = 0,
+                PageIndex = pageNumber??1,
+                TotalPages = totalPages??1,
                 HasNextPage = false,
                 HasPreviousPage = false,
-                ElementsPerPage = 5,
+                ElementsPerPage = pageSize??5,
                 ImageMaxSize = 32 * 1024,
                 BannerActivityType = 0,
                 SearchString = "",
                 AllDatabaseBannersCount = 0,
                 BannersList = null
             };
-            (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
+            (List<Banner> filteredList, int allCount, int pageNumberTmp, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
                 BannerIndexViewModelObject.PageIndex - 1,
                 BannerIndexViewModelObject.ElementsPerPage,
                 BannerIndexViewModelObject.SearchString);
@@ -203,11 +197,11 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 if (BannerIndexViewModelObject.AllDatabaseBannersCount < BannerIndexViewModelObject.ElementsPerPage)
                 {
-                    BannerIndexViewModelObject.PageIndex = 1;
+                    //BannerIndexViewModelObject.PageIndex = 1;
                 }
                 else
                 {
-                    BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
+                    //BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
                 }
             }
             BannerIndexViewModelObject.HasPreviousPage = (BannerIndexViewModelObject.PageIndex > 1) ? true : false;
@@ -218,7 +212,7 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
 
         // GET: Admin/Banners
         [HttpPost]
-        public async Task<IActionResult> Index(BannerIndexViewModel BannerIndexViewModelObject)
+        public async Task<IActionResult> Index(BannerIndexViewModel BannerIndexViewModelObject, int? pageNumber, int? totalPages, int? pageSize)
         {
             if (null == BannerIndexViewModelObject)
             {
@@ -236,6 +230,9 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 return View(BannerIndexViewModelObject);
             }
+            BannerIndexViewModelObject.PageIndex = pageNumber ?? 1;
+            BannerIndexViewModelObject.ElementsPerPage = pageSize ?? 5;
+            BannerIndexViewModelObject.TotalPages = totalPages ?? 1;
             BannerIndexViewModelObject.BannerViewModelObject.UrlLink = BannerIndexViewModelObject.BannerViewModelObject.UrlLink.Trim();
             BannerIndexViewModelObject.BannerViewModelObject.ImageLocationPath = BannerIndexViewModelObject.BannerViewModelObject.ImageLocationPath.Trim();
             if (BannerIndexViewModelObject.BannerViewModelObject.UrlLink.Length < 3)
@@ -254,8 +251,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 case 1:
                     {
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllActiveBannersByFilterAsync(
-                            BannerIndexViewModelObject.PageIndex - 1,
+                        (List<Banner> filteredList, int allCount, int pageNumber01, int elementsPerPage) = await this.bannerServices.GetPagedAllActiveBannersByFilterAsync(
+                            BannerIndexViewModelObject.PageIndex,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
                         BannerIndexViewModelObject.BannersList = this.bannersCollectionMapper.MapFrom(filteredList);
@@ -265,8 +262,8 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
                     }
                 case 2:
                     {
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllInactiveBannersByFilterAsync(
-                            BannerIndexViewModelObject.PageIndex - 1,
+                        (List<Banner> filteredList, int allCount, int pageNumber11, int elementsPerPage) = await this.bannerServices.GetPagedAllInactiveBannersByFilterAsync(
+                            BannerIndexViewModelObject.PageIndex,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
                         BannerIndexViewModelObject.BannersList = this.bannersCollectionMapper.MapFrom(filteredList);
@@ -278,7 +275,7 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
                 default:
                     {
                         BannerIndexViewModelObject.BannerActivityType = 0;
-                        (List<Banner> filteredList, int allCount, int pageNumber, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
+                        (List<Banner> filteredList, int allCount, int pageNumber12, int elementsPerPage) = await this.bannerServices.GetPagedAllBannersByFilterAsync(
                             BannerIndexViewModelObject.PageIndex - 1,
                             BannerIndexViewModelObject.ElementsPerPage,
                             BannerIndexViewModelObject.SearchString);
@@ -292,11 +289,11 @@ namespace PayCloud.WebApp.Areas.Admin.Controllers
             {
                 if (BannerIndexViewModelObject.AllDatabaseBannersCount < BannerIndexViewModelObject.ElementsPerPage)
                 {
-                    BannerIndexViewModelObject.PageIndex = 1;
+                    //BannerIndexViewModelObject.PageIndex = 1;
                 }
                 else
                 {
-                    BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
+                    //BannerIndexViewModelObject.PageIndex = BannerIndexViewModelObject.AllDatabaseBannersCount / BannerIndexViewModelObject.ElementsPerPage;
                 }
             }
             BannerIndexViewModelObject.HasPreviousPage = (BannerIndexViewModelObject.PageIndex > 1) ? true : false;

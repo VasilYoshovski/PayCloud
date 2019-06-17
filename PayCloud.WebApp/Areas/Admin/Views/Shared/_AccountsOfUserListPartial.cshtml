@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="accTable_length">
-                                    <label>
+                                    @*<label>
                                         Show
                                         <select name="dataTable_length" class="form-control form-control-sm" id="accTableLength">
                                             @foreach (var option in (int[])ViewData["LengthOptions"])
@@ -26,7 +26,7 @@
                                             }
 
                                         </select> entries
-                                    </label>
+                                    </label>*@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
@@ -48,13 +48,13 @@
                                         Num
                                     </th>
                                     <th>
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</div>
                                     </th>
                                     <th class="center">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().ClientName)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().ClientName)</div>
                                     </th>
                                     <th class="right">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().Balance)</div>
                                     </th>
                                     @*<th class="right">
             <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]" asp-route-userId="@ViewData["UserId"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
@@ -68,13 +68,13 @@
                                         Num
                                     </th>
                                     <th>
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["AccNumSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().AccountNumber)</div>
                                     </th>
                                     <th class="center">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().ClientName)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["ClientNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().ClientName)</div>
                                     </th>
                                     <th class="right">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
+                                        <div class="accTableClickHandler1" asp-action="GetAccountsOfUserList" asp-route-userId="@ViewData["UserId"]" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().Balance)</div>
                                     </th>
                                     @*<th class="right">
             <a class="accTableClickHandler" asp-action="GetAccountsOfUserList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
@@ -104,9 +104,9 @@
                                         @*<td class="right">
                                             @Html.DisplayFor(modelItem => item.NickName)
                                         </td>*@
-                                        <td align="right">
+                                        @*<td align="right">
                                             <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
-                                        </td>
+                                        </td>*@
                                     </tr>
                                 }
                             </tbody>

@@ -92,8 +92,8 @@ function confirmCreateUserDialogModal(message, handler) {
 									<input type="text" class="form-control" placeholder="Enter user name" value="" ID="modalCreateUserName" data-username="" required autofocus="">
 								</div>
 								<div class="form-group">
-									<label>NickName</label>
-									<input type="text" class="form-control" placeholder="Enter nick name" value="" ID="modalCreateUserNickName" data-usernickname="" required autofocus="">
+									<label>Name</label>
+									<input type="text" class="form-control" placeholder="Enter name" value="" ID="modalCreateUserNickName" data-usernickname="" required autofocus="">
 								</div>
 								<div class="form-group">
 									<label>Password</label>
