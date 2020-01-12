@@ -87,8 +87,8 @@
                                             @Html.DisplayFor(modelItem => item.ClientName)
                                         </td>
                                         @*<td align="right">
-                                            <a asp-action="GetClientsList" asp-route-id="@item.ClientId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
-                                        </td>*@
+                                                <a asp-action="GetClientsList" asp-route-id="@item.ClientId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
+                                            </td>*@
                                     </tr>
                                 }
                             </tbody>
@@ -133,6 +133,7 @@
                            asp-route-sortOrder="@ViewData["CurrentSort"]"
                            asp-route-pageNumber=@i
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["pageSize"]"
                            class="page-link clnTableClickHandler">
                             @i
                         </a>
@@ -144,6 +145,7 @@
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
                    asp-route-pageNumber="@(Model.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["pageSize"]"
                    class="page-link clnTableClickHandler">
                     Next
                 </a>

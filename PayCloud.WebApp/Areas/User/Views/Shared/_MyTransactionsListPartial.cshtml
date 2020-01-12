@@ -105,46 +105,52 @@
                                 {
                                     count = count + 1;
 
-                                <tr>
-                                    <td class="center">
-                                        @(count + (Model.PageIndex - 1) * Model.PageSize)
-                                    </td>
-                                    <td class="center">
-                                        @Html.DisplayFor(modelItem => item.MainAccountNum)
-                                        <p>@item.MainClientName</p>
-                                        <p><i>@item.MainNickname</i></p>
+                                    <tr>
+                                        <td class="center">
+                                            @(count + (Model.PageIndex - 1) * Model.PageSize)
+                                        </td>
+                                        <td class="center">
+                                            @Html.DisplayFor(modelItem => item.MainAccountNum)
+                                            <p>@item.MainClientName</p>
+                                            <p><i>@item.MainNickname</i></p>
 
-                                    </td>
-                                    <td class="center">
-                                        @item.CreatedOn.ToString(format: "dd.MM.yyyy/HH:mm")
-                                    </td>
-                                    <td class="center">
-                                        @(item.SentOn.HasValue ? item.SentOn.Value.ToString("dd.MM.yyyy/HH:mm") : "not send yet")
-                                    </td>
-                                    <td class="center">
-                                        @Html.DisplayFor(modelItem => item.SecondAccountNum)
-                                        <p>@item.SecondClientName</p>
-                                        <p><i>@item.SecondNickname</i></p>
+                                        </td>
+                                        <td class="center">
+                                            @item.CreatedOn.ToString(format: "dd.MM.yyyy/HH:mm")
+                                        </td>
+                                        <td class="center">
+                                            @(item.SentOn.HasValue ? item.SentOn.Value.ToString("dd.MM.yyyy/HH:mm") : "not send yet")
+                                        </td>
+                                        <td class="center">
+                                            @Html.DisplayFor(modelItem => item.SecondAccountNum)
+                                            <p>@item.SecondClientName</p>
+                                            <p><i>@item.SecondNickname</i></p>
 
-                                    </td>
-                                    <td class="right">
-                                        @item.Amount.ToString(format: "f2")
-                                    </td>
-                                    <td class="right">
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td class="right">
-                                        @switch(item.StatusCode)
-                                        {
-                                            case 0: { <span class="badge-info badge-pill" onclick="PaymentDialogShow(event,@item.TransactionId)">Saved</span> break; }
-                                            case 1: { <span class="badge-success badge-pill">Completed</span> break; }
-                                            case 2: { <span class="badge-danger badge-pill">Canceled</span> break; }
-                                        }
-                                    </td>
-                                    @*<td align="right">
-            <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
-        </td>*@
-                                </tr>
+                                        </td>
+                                        <td class="right">
+                                            @item.Amount.ToString(format: "f2")
+                                        </td>
+                                        <td class="right">
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td class="right">
+                                            @switch (item.StatusCode)
+                                            {
+                                                case 0:
+                                                    {<span class="badge-info badge-pill" onclick="PaymentDialogShow(event,@item.TransactionId)">Saved</span> break;
+                                                    }
+                                                case 1:
+                                                    { <span class="badge-success badge-pill">Completed</span> break;
+                                                    }
+                                                case 2:
+                                                    { <span class="badge-danger badge-pill">Canceled</span>break;
+                                                    }
+                                            }
+                                        </td>
+                                        @*<td align="right">
+                                                <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
+                                            </td>*@
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -159,13 +165,14 @@
     <ul class="pagination">
         @{
             var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                                        }
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
         <li class="paginate_button page-item previous @prevDisabled">
             <a asp-action="GetMyTransactionsList"
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               asp-route-pageSize="@ViewData["pageSize"]"
                class="page-link utrnTableClickHandler">
                 Previous
             </a>
@@ -187,6 +194,7 @@
                        asp-route-sortOrder="@ViewData["CurrentSort"]"
                        asp-route-pageNumber=@i
                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       asp-route-pageSize="@ViewData["pageSize"]"
                        class="page-link utrnTableClickHandler">
                         @i
                     </a>

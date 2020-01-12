@@ -2,6 +2,7 @@
 using PayCloud.Data.DbContext;
 using PayCloud.Data.Models;
 using PayCloud.Services.Tests.BannerServicesTests.Utils;
+using PayCloud.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var ReturnsRandomBanners = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(ReturnsRandomBanners);
             BannerServices sut;
@@ -36,7 +38,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 for (int i = 0; i < 100; i++)
                 {
@@ -77,6 +80,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var ReturnsEmptyList = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(ReturnsEmptyList);
             BannerServices sut;
@@ -90,7 +94,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 for (int i = 0; i < 100; i++)
                 {

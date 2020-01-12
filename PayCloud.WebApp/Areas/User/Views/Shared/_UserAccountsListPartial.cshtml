@@ -155,6 +155,7 @@
                            asp-route-sortOrder="@ViewData["CurrentSort"]"
                            asp-route-pageNumber=@i
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["pageSize"]"
                            class="page-link accTableClickHandler">
                             @i
                         </a>
@@ -166,6 +167,7 @@
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
                    asp-route-pageNumber="@(Model.PageIndex + 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["pageSize"]"
                    class="page-link accTableClickHandler">
                     Next
                 </a>

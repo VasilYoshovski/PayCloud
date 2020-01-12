@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PayCloud.Data.DbContext;
 using PayCloud.Services.Tests.BannerServicesTests.Utils;
+using PayCloud.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var ReturnsAllActiveBasnners = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(ReturnsAllActiveBasnners);
             BannerServices sut;
@@ -29,7 +31,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 var returnedBanner1 = await sut.CreateBannerAsync("ImagaPath1", "UrlLink1", startDate, endDate);
                 var returnedBanner2 = await sut.CreateBannerAsync("ImagaPath2", "UrlLink2", startDate, endDate);
@@ -51,6 +54,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var ReturnsEmptyList = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(ReturnsEmptyList);
             BannerServices sut;
@@ -62,7 +66,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 //Act
                 var testResult = await sut.GetAllActiveBannersAsync();

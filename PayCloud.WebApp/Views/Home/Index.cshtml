@@ -45,20 +45,23 @@
                         </div>
                     </div>
                 }
-                <div class="lr_icon text-center">
-                    <img src="images/logo_icon.png" alt="logo" />
-                </div>
+                else
+                {
+                    <div class="lr_icon text-center">
+                        <img src="images/logo_icon.png" alt="logo" />
+                    </div>
+                }
                 <h6 class="my-4 text-center text-uppercase">Welcome to Pay Cloud</h6>
                 <form asp-controller="Identity" asp-action="Login" asp-area="user" method="post">
                     <div class="input-item">
                         <label for="InputEmail">Username</label>
-                        <input asp-for="Username" id="InputEmail" type="text" placeholder="Your Username" class="form-control" required>
+                        <input asp-for="Username" id="InputEmail" type="text" value="DemoUser" placeholder="Your Username" class="form-control" required>
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <br />
                     <div class="input-item">
                         <label for="InputPassword">Password</label>
-                        <input asp-for="Password" type="password" id="InputPassword" placeholder="Password" class="form-control" required>
+                        <input asp-for="Password" type="password" id="InputPassword" value="a1234567" placeholder="Password" class="form-control" required>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div>
@@ -66,8 +69,20 @@
                         <button type="submit" class="btn btn-default btn-block">Log In</button>
                     </div>
                 </form>
+                <br />
+                <br />
+                <a class="btn btn-default btn-block" asp-controller="Login" asp-action="adminlogin" asp-area="admin">Go to Admin demo page</a>
+                <br />
+                <div class="text-center">
+                    <div class="" data-toggle="tooltip" data-placement="top" title="Send us a message">
+                        @*<a id="send-us-a-message-id" asp-controller="ContactForm" asp-action="SendUserMessage" asp-area="">*@
+                        <img src="~/images/Email_icon.svg" alt="Email:" style="width:30px;height:30px" />
+                        <small>cloud.team.public.relations@gmail.com</small>
+                        @*</a>*@
+                    </div>
+                    <small>© 2019 Telerik Academy.</small>
+                </div>
             </div>
         </div>
     </div>
-
 </div>

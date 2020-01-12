@@ -117,60 +117,62 @@
                                         <img src="~/images/paycloud_no_search_results.png" alt="No banners found!" style="width:520px;height:390px" />
                                     </div>
                                 }
-                            }
 
-                            <div>
-
-                                <div class="dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        @{
-                                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                                        }
-                                        <li class="paginate_button page-item previous @prevDisabled">
-                                            <a asp-action="GetBannersList"
-                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                               asp-route-pageNumber="@(Model.PageIndex - 1)"
-                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                               class="page-link bnrTableClickHandler">
-                                                Previous
-                                            </a>
-                                        </li>
-                                        @{
-                                            for (int i = 1; i <= Model.TotalPages; i++)
-                                            {
-                                                var isactiv = "";
-                                                if (i == Model.PageIndex)
-                                                {
-                                                    isactiv = "active";
+                                if (Model.Count > 0)
+                                {
+                                    <div>
+                                        <div class="dataTables_paginate paging_simple_numbers">
+                                            <ul class="pagination">
+                                                @{
+                                                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                                                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
                                                 }
-                                                else
-                                                {
-                                                    isactiv = "";
-                                                }
-                                                <li class="paginate_button page-item @isactiv">
+                                                <li class="paginate_button page-item previous @prevDisabled">
                                                     <a asp-action="GetBannersList"
                                                        asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                                       asp-route-pageNumber=@i
+                                                       asp-route-pageNumber="@(Model.PageIndex - 1)"
                                                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                                        class="page-link bnrTableClickHandler">
-                                                        @i
+                                                        Previous
                                                     </a>
                                                 </li>
-                                            }
-                                        }
-                                        <li class="paginate_button page-item next @nextDisabled">
-                                            <a asp-action="GetBannersList"
-                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                               asp-route-pageNumber="@(Model.PageIndex + 1)"
-                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                               class="page-link bnrTableClickHandler">
-                                                Next
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                                @{
+                                                    for (int i = 1; i <= Model.TotalPages; i++)
+                                                    {
+                                                        var isactiv = "";
+                                                        if (i == Model.PageIndex)
+                                                        {
+                                                            isactiv = "active";
+                                                        }
+                                                        else
+                                                        {
+                                                            isactiv = "";
+                                                        }
+                                                        <li class="paginate_button page-item @isactiv">
+                                                            <a asp-action="GetBannersList"
+                                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                                               asp-route-pageNumber=@i
+                                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                                               class="page-link bnrTableClickHandler">
+                                                                @i
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                }
+                                                <li class="paginate_button page-item next @nextDisabled">
+                                                    <a asp-action="GetBannersList"
+                                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                                       asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                                       class="page-link bnrTableClickHandler">
+                                                        Next
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                            }
 
                             @section Scripts {
 

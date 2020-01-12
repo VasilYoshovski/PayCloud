@@ -33,24 +33,24 @@
                                             <input asp-for="@Model.EndDate" class="form-control" />
                                             <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
                                         </div>
+                                        <div class="form-group">
+                                            <input type="submit" id="createBannerPartialButtonId" value="Create" class="btn btn-primary" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <label asp-for="@Model.ImageLocationPath" class="control-label"></label>
-                                        <input id="SelectedImageName" asp-for="@Model.ImageLocationPath" class="form-control" required title="3 characters minimum"/>
+                                        <input id="SelectedImageName" asp-for="@Model.ImageLocationPath" class="form-control" pattern=".{3,}" required placeholder="image path and name: 3 characters minimum" width="250" />
                                         <span asp-validation-for="@Model.ImageLocationPath" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <label asp-for="@Model.UrlLink" class="control-label"></label>
-                                        <input asp-for="@Model.UrlLink" class="form-control" required title="3 characters minimum"/>
+                                        <input asp-for="@Model.UrlLink" class="form-control" pattern=".{3,}" required placeholder=" url link: 3 characters minimum" width="250" />
                                         <span asp-validation-for="@Model.UrlLink" class="text-danger"></span>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" id="createBannerPartialButtonId" value="Create" class="btn btn-primary" />
                                 </div>
                             </form>
                         </div>

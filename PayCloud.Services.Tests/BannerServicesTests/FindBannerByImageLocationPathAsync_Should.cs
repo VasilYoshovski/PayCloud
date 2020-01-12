@@ -2,6 +2,7 @@
 using PayCloud.Data.DbContext;
 using PayCloud.Data.Models;
 using PayCloud.Services.Tests.BannerServicesTests.Utils;
+using PayCloud.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var databaseName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
@@ -30,7 +32,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 await assertContext.Banners.AddAsync(new Banner() {
                     UrlLink = "urlLink",
@@ -61,6 +64,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var databaseName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
@@ -72,7 +76,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
 
                 await assertContext.Banners.AddAsync(new Banner()
                 {

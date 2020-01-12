@@ -15,7 +15,7 @@ namespace PayCloud.WebApp.Utils
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAdminServices, AdminServices>();
-            services.AddTransient<IHashingService, HashingService>();
+            services.AddSingleton<IHashingService, HashingService>();
             services.AddTransient<ITokenManager, TokenManager>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

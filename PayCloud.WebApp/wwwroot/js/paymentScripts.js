@@ -22,11 +22,12 @@ function transferPayment(url, paymentDto, successfunc) {
             console.log('error');
             console.log(data);
 
-            if (data.responseJSON.value == null) {
+            
+            if (data.responseText == null) {
                 toastr.error("Error! Transaction canceled!");
             }
             else {
-                toastr.error(data.responseJSON.value);
+                toastr.error(data.responseText);
             }
         }
     });
@@ -106,7 +107,7 @@ function clearPaymentFields() {
         $('#senderaccount').data('balance', null);
         $('#receiveraccount').data('receiveraccount', null);
         $('#receiveraccount').val(null).trigger("change");
-        $('#paymentAmount').val(0.00);
+        $('#paymentAmount').val("");
         $('#paymentDescription').val(null);
     }
     else {
@@ -117,9 +118,23 @@ function clearPaymentFields() {
 };
 
 function paySavedPayment(transactionId) {
-    transferPayment('/user/transactions/PaySavedPayment', transactionId);
+    transferPayment('/user/transactions/PaySavedPayment', transactionId, PaymentUpdate);
+
 };
 
 function cancelSavedPayment(transactionId) {
-    transferPayment('/user/transactions/CancelSavedPayment', transactionId);
+    transferPayment('/user/transactions/CancelSavedPayment', transactionId, PaymentUpdate);
+
 };
+
+function PaymentUpdate() {
+
+    $("#transactionListPartial").html('<div class="center"><img src="/images/loading.gif" alt="Loading..."></div>');
+    $("#mytransactionListPartial").html('<div class="center"><img src="/images/loading.gif" alt="Loading..."></div>');
+
+    getTransactionsList('/user/transactions/GetTransactionsList', 'transactionListPartial');
+
+    getTransactionsList('/user/transactions/GetMyTransactionsList', 'mytransactionListPartial');
+
+    $("#myDialogModal").modal('hide');
+}

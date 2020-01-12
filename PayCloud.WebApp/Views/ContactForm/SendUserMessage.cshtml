@@ -1,0 +1,35 @@
+﻿@model ContactFormDto
+
+<div class="card-body">
+    <h4 class="my-4 text-center text-uppercase">Share your opinon with us</h4>
+    <form asp-controller="ContactForm" asp-action="SendUserMessage" method="post" style="width:500px">
+        <div class="input-item">
+            <label for="Name">Name</label>
+            <input asp-for=Name id="InputName" type="text" value="" placeholder="Enter name" class="form-control" required>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="input-item">
+            <label for="Title">Title</label>
+            <input asp-for=Title id="InputTitle" type="text" value="" placeholder="Enter title" class="form-control" required>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="input-item">
+            <label for="Message">Message</label>
+            <div>
+                <textarea id="InputMessage" name="Message" cols="60" rows="5" runat="server"></textarea>
+            </div>
+            @*<input asp-for=Message id="InputMessage" type="text" value="" placeholder="Enter message" class="form-control" required>
+            <span asp-validation-for="Message" class="text-danger"></span>*@
+        </div>
+        <div class="input-item">
+            <label for="Email">Email</label>
+            <input asp-for=Email id="InputEmail" type="text" value="" placeholder="Enter email" class="form-control" required>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <br />
+            <button type="submit" class="btn btn-default btn-block">Submit</button>
+        </div>
+    </form>
+</div>

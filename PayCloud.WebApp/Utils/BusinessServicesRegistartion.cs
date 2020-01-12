@@ -17,15 +17,15 @@ namespace PayCloud.WebApp.Utils
     {
         public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
-            services.AddTransient<IFileServicesProvider, FileServicesProvider>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IBannerServices, BannerServices>();
-            services.AddTransient<IRandom10Generator, Random10Generator>();
-            services.AddTransient<IDateTimeNowProvider, DateTimeNowProvider>();
-            services.AddTransient<IClientService, ClientService>();
-            services.AddTransient<IPayCloudUserServices, PayCloudUserServices>();
-            services.AddTransient<ITransactionServices, TransactionServices>();
-
+            services.AddScoped<IFileServicesProvider, FileServicesProvider>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IBannerServices, BannerServices>();
+            services.AddSingleton<IRandom10Generator, Random10Generator>();
+            services.AddSingleton<IDateTimeNowProvider, DateTimeNowProvider>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IPayCloudUserServices, PayCloudUserServices>();
+            services.AddScoped<ITransactionServices, TransactionServices>();
+            services.AddSingleton<IRandomProvider, RandomProvider>();
 
             return services;
         }

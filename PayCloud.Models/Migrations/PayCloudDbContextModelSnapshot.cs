@@ -33,10 +33,6 @@ namespace PayCloud.Data.Migrations
 
                     b.Property<int>("ClientId");
 
-                    b.Property<byte[]>("ConcurrencyRowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
                     b.HasKey("AccountId");
 
                     b.HasIndex("AccountNumber")

@@ -99,47 +99,47 @@
                                 {
                                     count = count + 1;
 
-                                <tr>
-                                    <td class="center">
-                                        @(count + (Model.PageIndex - 1) * Model.PageSize)
-                                    </td>
-                                    <td class="center">
-                                        <strong>@Html.DisplayFor(modelItem => item.MainAccountNum)</strong>
-                                        <p>@item.MainClientName</p>
-                                        <p><i>@item.MainNickname</i></p>
-
-                                    </td>
-                                    <td class="center">
-                                        @item.CreatedOn.ToString(format: "dd.MM.yyyy/HH:mm")
-                                    </td>
-                                    <td class="center">
-                                        @(item.SentOn.HasValue ? item.SentOn.Value.ToString("dd.MM.yyyy/HH:mm") : "not send yet")
-                                    </td>
-                                    <td class="center">
-                                        <strong>@Html.DisplayFor(modelItem => item.SecondAccountNum)</strong>
-                                        <p>@item.SecondClientName</p>
-                                        <p><i>@item.SecondNickname</i></p>
-                                    </td>
-                                    @if (item.Amount>0)
-                                    {
-                                        <td class="right green-text">
-                                            @item.Amount.ToString(format: "f2")
+                                    <tr>
+                                        <td class="center">
+                                            @(count + (Model.PageIndex - 1) * Model.PageSize)
                                         </td>
-                                    }
-                                    else
-                                    {
-                                        <td class="right red-text">
-                                            @item.Amount.ToString(format: "f2")
-                                        </td>
+                                        <td class="center">
+                                            <strong>@Html.DisplayFor(modelItem => item.MainAccountNum)</strong>
+                                            <p>@item.MainClientName</p>
+                                            <p><i>@item.MainNickname</i></p>
 
-                                    }
-                                    <td class="right">
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    @*<td align="right">
-            <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
-        </td>*@
-                                </tr>
+                                        </td>
+                                        <td class="center">
+                                            @item.CreatedOn.ToString(format: "dd.MM.yyyy/HH:mm")
+                                        </td>
+                                        <td class="center">
+                                            @(item.SentOn.HasValue ? item.SentOn.Value.ToString("dd.MM.yyyy/HH:mm") : "not send yet")
+                                        </td>
+                                        <td class="center">
+                                            <strong>@Html.DisplayFor(modelItem => item.SecondAccountNum)</strong>
+                                            <p>@item.SecondClientName</p>
+                                            <p><i>@item.SecondNickname</i></p>
+                                        </td>
+                                        @if (item.Amount > 0)
+                                        {
+                                            <td class="right green-text">
+                                                @item.Amount.ToString(format: "f2")
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="right red-text">
+                                                @item.Amount.ToString(format: "f2")
+                                            </td>
+
+                                        }
+                                        <td class="right">
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        @*<td align="right">
+                                                <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
+                                            </td>*@
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -182,6 +182,7 @@
                        asp-route-sortOrder="@ViewData["CurrentSort"]"
                        asp-route-pageNumber=@i
                        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       asp-route-pageSize="@ViewData["pageSize"]"
                        class="page-link trnTableClickHandler">
                         @i
                     </a>
@@ -193,6 +194,7 @@
                asp-route-sortOrder="@ViewData["CurrentSort"]"
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               asp-route-pageSize="@ViewData["pageSize"]"
                class="page-link trnTableClickHandler">
                 Next
             </a>

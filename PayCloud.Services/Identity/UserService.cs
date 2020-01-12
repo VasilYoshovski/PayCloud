@@ -33,10 +33,11 @@ namespace PayCloud.Services.Identity
         {
             var user = await this.context.PayCloudUsers.SingleOrDefaultAsync(x => x.Username == username);
 
-            //var user = new PayCloudUser() {
-            //    Username = "stakata",
-            //    Password = "12345678",
-            //    Role = "Admin"
+            //user = new PayCloudUser() {
+            //    Username = "DemoUser",
+            //    Password = "a1234567",
+            //    Hash = "9626C7444717AAB7A3BBDD509BCAFA35A7491E9478D421B38E539A621F695EDD"
+            //    Role = "User"
             //};
 
             if (user == null)

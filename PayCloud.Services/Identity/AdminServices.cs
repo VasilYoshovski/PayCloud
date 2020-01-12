@@ -27,6 +27,13 @@ namespace PayCloud.Services.Identity
         {
             var admin = await context.PayCloudAdmins.AsNoTracking().SingleOrDefaultAsync(x => x.Username == username);
 
+            //admin = new PayCloudAdmin() {
+            //    Username = "DemoAdmin",
+            //    Password = "a1234567",
+            //    Hash = "9626C7444717AAB7A3BBDD509BCAFA35A7491E9478D421B38E539A621F695EDD"
+            //    Role = "Admin"
+            //};
+
             if (admin == null)
             {
                 throw new ServiceErrorException(Constants.WrongCredentials);

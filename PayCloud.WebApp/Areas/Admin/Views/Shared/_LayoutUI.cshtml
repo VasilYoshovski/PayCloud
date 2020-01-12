@@ -30,29 +30,41 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body class="fixed-nav sticky-footer" id="page-top">
+    <div class="bg_image h-100">
 
-    <span class="AntiForge"> @Html.AntiForgeryToken() </span>
-    <partial name="_SideNavPartial" />
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            @RenderBody()
-        </div>
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Stanislav Dinev - Vasil Yoshovski</small>
-                <br />
-                <small>© 2019 Telerik Academy.</small>
+        <span class="AntiForge"> @Html.AntiForgeryToken() </span>
+        <partial name="_SideNavPartial" />
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
             </div>
         </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded btn-default" onclick="window.scrollTo(0, 0);">
-        <i class="fa fa-angle-up"></i>
-    </a>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <div class="" data-toggle="tooltip" data-placement="top" title="Send us a message">
+                        <a id="send-us-a-message-id" onclick="GetMessageModal()" href="#">
+                            <img src="~/images/Email_icon.svg" alt="Email:" style="width:30px;height:30px" />
+                            <small>cloud.team.public.relations@gmail.com</small>
+                        </a>
+                    </div>
+                    <small>© 2019 Telerik Academy.</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded btn-default" onclick="window.scrollTo(0, 0);">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    </div>
+
+    <!-- Send us a message modal -->
+    <div id="myModalPartial" style="width:200px">
+        <partial name="_ModalPartial" />
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -99,7 +111,87 @@
     <script src="~/js/userMenu.js"></script>
     @*<script src="~/js/site.js" asp-append-version="true"></script>*@
 
+    <script>
+        $('#mymodal-close-button').click(function (event) {
+            //event.preventDefault();
+            //event.stopImmediatePropagation();
+            let tempName = $('#InputName').val();
+            let tempTitle = $('#InputTitle').val();
+            let tempEmail = $('#InputEmail').val();
+            let tempMessage = $('#InputMessage').val();
+
+            url = '/ContactForm/SendUserMessage';
+            sendUsAMessagePost(url, tempName, tempTitle, tempEmail, tempMessage);
+        });
+
+        function sendUsAMessagePost(url, tempName, tempTitle, tempEmail, tempMessage ) {
+            $("#myModal").modal('hide');
+            if (url == null) {
+                url = '/ContactForm/SendUserMessage';
+            }
+            $.ajax({
+                url: url,
+                data: {
+                    Name: tempName,
+                    Title: tempTitle,
+                    Email: tempEmail,
+                    Message: tempMessage
+                },
+                type: "post",
+                success: function (data) {
+                    toastr.success('Message sent');
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                    toastr.error('Message not sent');
+                }
+            });
+        }
+
+        //function template() {
+        //    url = '/ContactForm/SendUserMessage';
+        //    console.log(url);
+        //    sendUsAMessagePost(url, 'mymodal');
+        //};
+
+        function SentMessageDataToController(url, elementid) {
+
+            if (url == null) {
+
+                url = '/ContactForm/GetSendUserMessage';
+            }
+            if (elementid == null) {
+                elementid = 'mymodalmain';
+            }
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (data) {
+                    $('#' + elementid).html(data);
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                    $('#' + elementid).html('Error loading clients list...');
+                }
+            });
+        }
+
+        function GetMessageModal() {
+
+            $('#mymodaltitle').text('We value your ideas')
+            $('#myModalSize').attr('class', 'modal-dialog-cust-mid');
+
+            url = '/ContactForm/GetSendUserMessage';
+            console.log(url);
+            $("#mymodalmain").html('<div class="center"><img src="/images/loading.gif" alt="Loading..."></div>');
+            SentMessageDataToController(url, 'mymodalmain');
+            $("#mymodal-close-button").toggle(true);
+
+            $("#myModal").modal('show');
+        };
+
+    </script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-

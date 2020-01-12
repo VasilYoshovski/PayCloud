@@ -57,8 +57,8 @@
                                         <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
                                     </th>
                                     @*<th class="right">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
-                                    </th>*@
+                                            <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-pageSize="@ViewData["pageSize"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-clientId="@ViewData["ClientId"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
+                                        </th>*@
                                     <th></th>
                                 </tr>
                             </thead>
@@ -77,9 +77,9 @@
                                         <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["BalanceSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().Balance)</a>
                                     </th>
                                     @*<th class="right">
-                                        <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
-                                    </th>*@
-                                    <th></th>
+                                            <a class="accTableClickHandler" asp-action="GetAccountsList" asp-route-sortOrder="@ViewData["NickNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.First().NickName)</a>
+                                        </th>*@
+                                    @*<th></th>*@
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -102,11 +102,11 @@
                                             @Html.DisplayFor(modelItem => item.Balance)
                                         </td>
                                         @*<td class="right">
-                                            @Html.DisplayFor(modelItem => item.NickName)
-                                        </td>*@
-                                        <td align="right">
-                                            <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
-                                        </td>
+                                                @Html.DisplayFor(modelItem => item.NickName)
+                                            </td>*@
+                                        @*<td align="right">
+                                                <a asp-action="Details" asp-route-id="@item.AccountId"><button class="btn btn-outline-info btn-sm"><span>Details</span></button></a>
+                                            </td>*@
                                     </tr>
                                 }
                             </tbody>
@@ -130,6 +130,7 @@
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
                    asp-route-pageNumber="@(Model.PageIndex - 1)"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-pageSize="@ViewData["pageSize"]"
                    class="page-link accTableClickHandler">
                     Previous
                 </a>
@@ -151,6 +152,7 @@
                            asp-route-sortOrder="@ViewData["CurrentSort"]"
                            asp-route-pageNumber=@i
                            asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["pageSize"]"
                            class="page-link accTableClickHandler">
                             @i
                         </a>

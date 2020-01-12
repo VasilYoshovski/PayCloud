@@ -4,6 +4,7 @@ using Moq;
 using PayCloud.Data.DbContext;
 using PayCloud.Services.Providers;
 using PayCloud.Services.Tests.BannerServicesTests.Utils;
+using PayCloud.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +23,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
+            RandomProvider rp = new RandomProvider();
 
             using (var assertContext = new PayCloudDbContext(options))
             {
@@ -31,7 +33,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 sut = new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object);
+                    LoggerMock.Object,
+                    rp);
             }
 
             //Assert
@@ -46,6 +49,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
+            RandomProvider rp = new RandomProvider();
 
             InitMocks();
 
@@ -53,7 +57,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
             Assert.ThrowsException<ArgumentNullException>(() => new BannerServices(
                     null,
                     DateTimeNowMock.Object,
-                    LoggerMock.Object));
+                    LoggerMock.Object,
+                    rp));
         }
 
         [TestMethod]
@@ -61,6 +66,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var databaseName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
@@ -73,7 +79,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 Assert.ThrowsException<ArgumentNullException>(() => new BannerServices(
                     assertContext,
                     null,
-                    LoggerMock.Object));
+                    LoggerMock.Object,
+                    rp));
             }
         }
 
@@ -82,6 +89,7 @@ namespace PayCloud.Services.Tests.BannerServicesTests
         {
             //Arrange
             var databaseName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+            RandomProvider rp = new RandomProvider();
 
             var options = Seeder.GetOptions(databaseName);
             BannerServices sut;
@@ -94,7 +102,8 @@ namespace PayCloud.Services.Tests.BannerServicesTests
                 Assert.ThrowsException<ArgumentNullException>(() => new BannerServices(
                     assertContext,
                     DateTimeNowMock.Object,
-                    null));
+                    null,
+                    rp));
             }
         }
     }

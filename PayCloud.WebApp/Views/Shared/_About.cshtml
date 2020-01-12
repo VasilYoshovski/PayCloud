@@ -1,0 +1,270 @@
+﻿<div class="row">
+    <h1 id="paycloudpaymentsystem">PayCloud payment system</h1>
+
+    <p>​Web Application (ver 1.0)</p>
+
+    <h2 id="cnetjan19">C# .NET Jan'19</h2>
+
+    <p>Telerik Academy</p>
+
+    <p>Created by: PayCloud Management Center Team</p>
+
+    <h2 id="teammembers">Team members:</h2>
+
+    <p><a href="https://gitlab.com/stakAtak">Stanislav Dinev</a></p>
+
+    <p><a href="https://gitlab.com/VasilNYoshovski">Vasil Yoshovski</a></p>
+
+    <h1 id="projectdescription">Project Description</h1>
+
+    <h2 id="onlinepaymentportalthathave">Online payment portal that have:</h2>
+
+    <ul>
+        <li>public part accessible without authentication</li>
+
+        <li>private part available for registered users</li>
+
+        <li>administrative part available for administrators only</li>
+    </ul>
+
+    <h2 id="privatearea">Private area</h2>
+
+    <p>Registered users should have private part in the web application accessible after successful login with correct username and password.</p>
+
+    <p>The private part of the website should be available only to logged-in users. If an anonymous user tries to access any of these pages, they should be redirected to the login page.</p>
+
+    <p>Users can access the accounts to which they have access rights and make simple payments internally between the accounts registered in the system.</p>
+
+    <p>It should have:</p>
+
+    <ul>
+        <li>
+            <p>
+                A top service bar on all pages that displays the following information:
+                The name of the currently logged-in user.
+                Logout button
+            </p>
+        </li>
+
+        <li>
+            <p>
+                Navigation bar on all pages with following menus:
+                Accounts (link to Account dashboard page)
+                Transactions (link to Transactions page)
+            </p>
+        </li>
+    </ul>
+
+    <p>The default page in private area after login is Account dashboard page.</p>
+
+    <h3 id="accountdashboardpage">Account dashboard page</h3>
+
+    <p>
+        Account dashboard page should present a list of all accounts to which the user has access
+        For each account in the list, following information should be presented:
+    </p>
+
+    <ul>
+        <li>Nickname</li>
+
+        <li>Account number</li>
+
+        <li>Current balance </li>
+    </ul>
+
+    <p>For each account additional options should be available:</p>
+
+    <ul>
+        <li>Rename account – changes the nickname of the account</li>
+
+        <li>Make payment – initiates payment from respective account (pls see Make payment functionality later in the document)</li>
+
+        <li>View transactions – Presents all transactions on the account at the Transactions page</li>
+    </ul>
+
+    <p>If the user has more than one registered accounts, also a new section should appear on the page, with pie chart for all accounts with pie sizes proportional to the balance of each account.</p>
+
+    <h3 id="transactionspage">Transactions page</h3>
+
+    <p>Transactions page presents a list of all payments made or received by the user</p>
+
+    <p>For each transaction, following information should be presented:</p>
+
+    <ul>
+        <li>Payer account (initiating account – the account from which the payment is made)</li>
+
+        <li>Payer client name (Name of the client to which the payer account belongs)</li>
+
+        <li>Payee account (receiving account – the account to which the payment is made)</li>
+
+        <li>Payee client name (Name of the client to which the payee account belongs)</li>
+
+        <li>Description</li>
+
+        <li>Amount</li>
+
+        <li>Timestamp (date / time) </li>
+
+        <li>Indication if this is an outgoing or incoming transaction (+/-; red/green or other by choice of the developer)</li>
+
+        <li>Status (“Sent” or “Saved”)</li>
+    </ul>
+
+    <p>If Status is “Saved”, then following buttons/links should be presented:</p>
+
+    <ul>
+        <li>Send – action identical to “Send” option in Make payment functionality for respective payment</li>
+
+        <li>Edit – opens respective payment for editing as described in Make payment functionality with respective fields preloaded with already saved data)</li>
+    </ul>
+
+    <p>Transactions should be sorted by timestamp in descending order (newest first)</p>
+
+    <p>User should be able to filter transactions by account (with a dropdown list of accounts, for example positioned above the transactions list). If the user is redirected to Transactions page from “View transactions” functionality for an account from Account dashboard page, then respective account should be preloaded in the account selection dropdown.</p>
+
+    <p>
+        Transactions should be presented in pages of 5 (with a navigation row positioned below transactions list with page numbers allowing the user to navigate to specific page and options “next page”, “prev page”
+        On Transactions page also a Button/Link should be available to initiate a new payment
+    </p>
+
+    <p>Transactions list for the user should contain only:</p>
+
+    <ul>
+        <li>transactions where payer account is registered for the user, no matter of status</li>
+
+        <li>transactions where payee account is registered for the user and the status of payment is “Sent”</li>
+    </ul>
+
+    <h3 id="makepaymentfunctionality">Make payment functionality</h3>
+
+    <ul>
+        <li>Payer account: dropdown to select an account from which the payment will be made</li>
+
+        <li>Payer client name: Name of the client to which the payer account belongs</li>
+
+        <li>Payee account: the account to which the payment will be made</li>
+
+        <li>Editable field: the user manually enters account number; while typing, after some symbols typed, a lookup is initiated to search for matching accounts in the database; the user then selects from result(s) found. In case of non-existing account, appropriate error message should be displayed.</li>
+
+        <li>Payee client name: Name of the client to which the payee account belongs. Non editable, to be filled in based on the selected payee account</li>
+
+        <li>Description: limited to 35 symbols</li>
+
+        <li>Amount</li>
+    </ul>
+
+    <p>All fields are mandatory.</p>
+
+    <p>
+        Make payments functionality can be initiated either from Account dashboard or from Transactions page.
+        If initiated from Account dashboard, the Payer account should be preloaded with the account from which the payment was initiated.
+    </p>
+
+    <p>If initiated from Transactions page, the Payer account stays empty by default.</p>
+
+    <p>Amount should not exceed the balance amount of the account.</p>
+
+    <p>Two options should be available:</p>
+
+    <ul>
+        <li>“Save”: saves the payment with status “Saved” without any other action</li>
+
+        <li>“Send”: saves the payment with status “Sent”, and also updates respective account balances</li>
+    </ul>
+
+    <p>Updating the balance of the payer account:</p>
+
+    <ul>
+        <li>should subtract the amount of payment from current balance </li>
+
+        <li>update the balance of the payee account: adds the amount of payment to the balance of respective account</li>
+    </ul>
+
+    <p>After saving or sending, the payment should be visualized in transactions list on Transactions page.</p>
+
+    <h3 id="adminarea">Admin area</h3>
+
+    <p>System administrators should have administrative access to the system.</p>
+
+    <p>The admin part of the application consists of:</p>
+
+    <ul>
+        <li>Login page for administrators</li>
+
+        <li>User administration page</li>
+
+        <li>Banner ad administration page</li>
+
+        <li>Login</li>
+    </ul>
+
+    <p>Administrative users should have a separate administrative site</p>
+
+    <p>The admin homepage should display a login section with username and password fields for administrators</p>
+
+    <p>Administrators with their usernames and passwords should be manually entered as records in the database by the developer</p>
+
+    <h3 id="adminareaservices">Admin area services</h3>
+
+    <ul>
+        <li>User management: Admins should be able to register clients, accounts and users with following functionality</li>
+    </ul>
+
+    <p>
+        Add client, with following attributes:
+        Name (limited to 35 symbols)
+        -> Add accounts:
+        For each client –  add accounts, with following attributes:
+        Account number – 10 digit number
+        (account balance) – initializes with a default balance of 10 000 BGN (configurable in system config)
+        (account nickname) – initializes by default = account number
+        --> Add users:
+        For each client – add users, with following attributes:
+        Name (limited to 35 symbols)
+        Username (for login) (limited to 16 symbols)
+        Password (for login) (limited to 32 symbols; to be stored as hash in the database)
+        --> Register accounts for each user:
+    </p>
+
+    <p>For each user of the client the administrator selects the subset of accounts (from all accounts of the client) to which the user will have access.</p>
+
+    <h3 id="bannermanagement">Banner management</h3>
+
+    <p>Admins should be able to define banners with ads to be presented to users on user site home page</p>
+
+    <ul>
+        <li>
+            <p>Add banner:</p>
+
+            <p>
+                banner's attributes are: Banner image (image with fixed size depending on the UI design implemented by developer)
+                Banner link (a link with URL to redirect when the banner is clicked on)
+                Banner validity period (the banner should be visualized to users only during this period)
+                Start date
+                End date
+            </p>
+        </li>
+
+        <li><p>Remove banner</p></li>
+    </ul>
+
+    <h1 id="technologies">Technologies:</h1>
+
+    <p>ASP .Net Core</p>
+
+    <p>Entity Framework Core</p>
+
+    <p>MS SQL Server</p>
+
+    <p>jQuery</p>
+
+    <p>Ajax</p>
+
+    <p>Bootstrap</p>
+
+    <p>JavaScript</p>
+
+    <p>CSS</p>
+
+    <p>HTML</p>
+</div>

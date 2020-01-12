@@ -88,8 +88,8 @@ namespace PayCloud.Services
                   StatusCode = x.StatusCode,
                   MainNickname = (nicknames.ContainsKey(x.SenderAccountId)) ? nicknames[x.SenderAccount.AccountId] : null,
                   SecondNickname = (nicknames.ContainsKey(x.ReceiverAccountId)) ? nicknames[x.ReceiverAccount.AccountId] : null,
-                  MainClientName = x.ReceiverAccount.Client.Name,
-                  SecondClientName = x.SenderAccount.Client.Name
+                  MainClientName = x.SenderAccount.Client.Name,
+                  SecondClientName = x.ReceiverAccount.Client.Name
 
               });
 
@@ -211,8 +211,8 @@ namespace PayCloud.Services
                     TransactionId = x.TransactionId,
                     MainNickname = (nicknames.ContainsKey(x.SenderAccountId)) ? nicknames[x.SenderAccount.AccountId] : null,
                     SecondNickname = (nicknames.ContainsKey(x.ReceiverAccountId)) ? nicknames[x.ReceiverAccount.AccountId] : null,
-                    MainClientName = x.ReceiverAccount.Client.Name,
-                    SecondClientName = x.SenderAccount.Client.Name
+                    MainClientName = x.SenderAccount.Client.Name,
+                    SecondClientName = x.ReceiverAccount.Client.Name
                 }
             );
         }

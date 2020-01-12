@@ -38,6 +38,22 @@ namespace PayCloud.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PayCloudAdmins",
+                columns: table => new
+                {
+                    AdminId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 35, nullable: false),
+                    Username = table.Column<string>(maxLength: 16, nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    Role = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PayCloudAdmins", x => x.AdminId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PayCloudUsers",
                 columns: table => new
                 {
@@ -60,7 +76,6 @@ namespace PayCloud.Data.Migrations
                     AccountId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AccountNumber = table.Column<string>(maxLength: 10, nullable: false),
-                    NickName = table.Column<string>(maxLength: 35, nullable: false),
                     Balance = table.Column<decimal>(nullable: false),
                     ClientId = table.Column<int>(nullable: false)
                 },
@@ -107,15 +122,22 @@ namespace PayCloud.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<decimal>(nullable: false),
                     Description = table.Column<string>(maxLength: 100, nullable: true),
-                    TimeStamp = table.Column<DateTime>(nullable: false),
-                    IsSent = table.Column<bool>(nullable: false),
-                    IsCanceled = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    SentOn = table.Column<DateTime>(nullable: true),
+                    StatusCode = table.Column<int>(nullable: false),
+                    CreatedByUserId = table.Column<int>(nullable: false),
                     SenderAccountId = table.Column<int>(nullable: false),
                     ReceiverAccountId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.TransactionId);
+                    table.ForeignKey(
+                        name: "FK_Transactions_PayCloudUsers_CreatedByUserId",
+                        column: x => x.CreatedByUserId,
+                        principalTable: "PayCloudUsers",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transactions_Accounts_ReceiverAccountId",
                         column: x => x.ReceiverAccountId,
@@ -136,7 +158,8 @@ namespace PayCloud.Data.Migrations
                 {
                     PayCloudUserId = table.Column<int>(nullable: false),
                     AccountId = table.Column<int>(nullable: false),
-                    AddedOn = table.Column<DateTime>(nullable: false)
+                    AddedOn = table.Column<DateTime>(nullable: false),
+                    AccountNickname = table.Column<string>(maxLength: 35, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,9 +179,38 @@ namespace PayCloud.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Accounts_AccountNumber",
+                table: "Accounts",
+                column: "AccountNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Accounts_ClientId",
                 table: "Accounts",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_Name",
+                table: "Clients",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PayCloudAdmins_Username",
+                table: "PayCloudAdmins",
+                column: "Username",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PayCloudUsers_Username",
+                table: "PayCloudUsers",
+                column: "Username",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_CreatedByUserId",
+                table: "Transactions",
+                column: "CreatedByUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_ReceiverAccountId",
@@ -185,6 +237,9 @@ namespace PayCloud.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Banners");
+
+            migrationBuilder.DropTable(
+                name: "PayCloudAdmins");
 
             migrationBuilder.DropTable(
                 name: "Transactions");

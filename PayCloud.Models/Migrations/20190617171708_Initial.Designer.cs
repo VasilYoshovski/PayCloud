@@ -10,8 +10,8 @@ using PayCloud.Data.DbContext;
 namespace PayCloud.Data.Migrations
 {
     [DbContext(typeof(PayCloudDbContext))]
-    [Migration("20190608113352_User_Transaction_relation_added")]
-    partial class User_Transaction_relation_added
+    [Migration("20190617171708_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,14 +34,6 @@ namespace PayCloud.Data.Migrations
                     b.Property<decimal>("Balance");
 
                     b.Property<int>("ClientId");
-
-                    b.Property<byte[]>("ConcurrencyRowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("NickName")
-                        .IsRequired()
-                        .HasMaxLength(35);
 
                     b.HasKey("AccountId");
 
@@ -92,6 +84,34 @@ namespace PayCloud.Data.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("PayCloud.Data.Models.PayCloudAdmin", b =>
+                {
+                    b.Property<int>("AdminId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(35);
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<string>("Role")
+                        .IsRequired();
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(16);
+
+                    b.HasKey("AdminId");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("PayCloudAdmins");
+                });
+
             modelBuilder.Entity("PayCloud.Data.Models.PayCloudUser", b =>
                 {
                     b.Property<int>("UserId")
@@ -125,6 +145,9 @@ namespace PayCloud.Data.Migrations
                     b.Property<int>("PayCloudUserId");
 
                     b.Property<int>("AccountId");
+
+                    b.Property<string>("AccountNickname")
+                        .HasMaxLength(35);
 
                     b.Property<DateTime>("AddedOn");
 

@@ -4,6 +4,7 @@ using PayCloud.Data.DbContext;
 using PayCloud.Data.Models;
 using PayCloud.Services.Contracts;
 using PayCloud.Services.Providers;
+using PayCloud.Services.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,18 @@ namespace PayCloud.Services
         private readonly PayCloudDbContext context;
         private readonly IDateTimeNowProvider dateTimeNowProvider;
         private readonly ILogger<BannerServices> logger;
+        private readonly IRandomProvider randomProvider;
 
         public BannerServices(
             PayCloudDbContext context,
             IDateTimeNowProvider dateTimeNowProvider,
-            ILogger<BannerServices> logger)
+            ILogger<BannerServices> logger,
+            IRandomProvider randomProvider)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
             this.dateTimeNowProvider = dateTimeNowProvider ?? throw new ArgumentNullException(nameof(dateTimeNowProvider));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.randomProvider = randomProvider ?? throw new ArgumentNullException(nameof(randomProvider));
         }
 
         //public async Task<Banner> FindBannerByUrlAsync(string searchString)
@@ -199,11 +203,10 @@ namespace PayCloud.Services
             var fullList = await GetAllActiveBannersAsync();
             if (fullList.Count > bannersCount)
             {
-                Random random = new Random();
                 var randomList = new List<Banner>();
                 for (int i = 0; i < bannersCount; i++)
                 {
-                    var index = random.Next() % fullList.Count;
+                    var index = this.randomProvider.Next % fullList.Count;
                     randomList.Add(fullList.ElementAt(index));
                     fullList.RemoveAt(index);
                 }
